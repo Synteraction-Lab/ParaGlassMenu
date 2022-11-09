@@ -155,7 +155,7 @@ jspm_packages/
 ## Unity
 
 
-/[Ll]ibrary/
+*/[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
 /[Bb]uild/
