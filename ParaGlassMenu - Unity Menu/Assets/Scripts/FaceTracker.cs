@@ -125,7 +125,6 @@ namespace FaceTracking
             count++;
         }
 
-
         void FindNewFace(Mat frame)
         {
             Mat gray = new Mat();
@@ -224,6 +223,7 @@ namespace FaceTracking
             return snMatrix;
         }
 
+        // Reference: https://community.nreal.ai/t/aruco-pose-estimation-calibration-parameters/228/9
         bool TryGetWorldPosition(Vector2 pixelPosition, float distance, out Vector3 worldPosition)
         {
             var glassesPose = Pose.identity;

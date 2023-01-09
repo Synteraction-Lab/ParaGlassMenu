@@ -174,6 +174,7 @@ namespace MenuController {
 
 		    	}
 
+			// Switch face tracking debugging mode using Nreal's controller (press App button)
 			if (NRKernal.NRInput.GetButtonDown(NRKernal.ControllerButton.TRIGGER))
 			{
 				FaceTracker.SwitchDebuggingInfoStatus();
