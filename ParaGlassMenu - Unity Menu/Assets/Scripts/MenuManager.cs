@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 // using NRKernal;
 using Music;
+using FaceTracking;
 
 
 namespace MenuController {
@@ -172,6 +173,11 @@ namespace MenuController {
 		    	last_state = state;    
 
 		    	}
+
+			if (NRKernal.NRInput.GetButtonDown(NRKernal.ControllerButton.TRIGGER))
+			{
+				FaceTracker.SwitchDebuggingInfoStatus();
+			}
 
 	    }
 

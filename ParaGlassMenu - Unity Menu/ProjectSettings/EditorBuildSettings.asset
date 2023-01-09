@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 0
+    path: Assets/OpenCV+Unity/Demo/Face_Detector/FaceDetectorScene.unity
+    guid: dc53129b9536b4047802944847361339
+  - enabled: 1
+    path: Assets/Initial Menu.unity
+    guid: 205fadadab909474fa2a4f43998f711e
   m_configObjects: {}
