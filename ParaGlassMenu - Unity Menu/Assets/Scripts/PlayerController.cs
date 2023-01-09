@@ -24,7 +24,7 @@ namespace Music
 	    // Update is called once per frame
 	    void Update()
 	    {
-	    	if ((StateMachine.ParseCommand() == Command.Up) && isValidSong())
+	    	if ((StateMachine.ParseCommand() == Command.Up) && IsValidSong())
 	    	{
 	    		isPlaying = !isPlaying;
 				if (isPlaying)
@@ -62,7 +62,7 @@ namespace Music
     		isPlaying = false;
 	    }
 
-	    bool isValidSong()
+	    bool IsValidSong()
 	    {
 	    	return (MenuManager.GetSelectedSong()!=null)? true : false;
 	    }
