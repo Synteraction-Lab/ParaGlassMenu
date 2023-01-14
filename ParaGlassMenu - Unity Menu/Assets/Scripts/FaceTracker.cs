@@ -11,6 +11,8 @@ namespace FaceTracking
 {
     public class FaceTracker : MonoBehaviour
     {
+        private const float DEFAULT_DISTANCE = 1.5f;
+
         // Start is called before the first frame update
         WebCamTexture webCamTexture;
         NRRGBCamTexture RGBCamTexture;
@@ -133,9 +135,8 @@ namespace FaceTracking
             // fix shadows
             Cv2.EqualizeHist(gray, gray);
 
-            var faces = cascadeFace.DetectMultiScale(gray, 1.1, 5, HaarDetectionType.ScaleImage);
+            var faces = cascadeFace.DetectMultiScale(gray, 1.1, 3, HaarDetectionType.ScaleImage);
 
-            //var faces = cascadeFace.DetectMultiScale(frame, 1.1, 5, HaarDetectionType.ScaleImage);
             if (faces.Length >= 1)
             {
                 Mat candidateFace = new Mat(gray, faces[0]);
@@ -146,16 +147,20 @@ namespace FaceTracking
                     return;
                 }
                 GuestFace = faces[0];
-                //faceX = faces[0].X + faces[0].Width/2 - frame.Size().Width / 2;
-                //faceY = faces[0].Y + faces[0].Height/2 - frame.Size().Height / 2;
+
                 faceX = faces[0].X + faces[0].Width / 2;
                 faceY = faces[0].Y + faces[0].Height / 2;
 
-                float distance = 1.5f;
+                TryGetWorldPosition(new Vector2(faceX, faceY), DEFAULT_DISTANCE, out Vector3 worldPosition);
 
-                TryGetWorldPosition(new Vector2(faceX, faceY), distance, out Vector3 worldPosition);
+                worldPosition = new Vector3(worldPosition.x, -worldPosition.y -0.3f, worldPosition.z);
                 FrameCount.text = GuestFace.Size.ToString() + "\n" + worldPosition.ToString() + "\nX:" + faceX + " Y:" + faceX + " frame:" + frame.Size().ToString();
-                menuOffset.transform.position = worldPosition;
+
+                // Stablize menu movement
+                if (Vector3.Distance(menuOffset.transform.position, worldPosition) > 0.05)
+                {
+                    menuOffset.transform.position = worldPosition;
+                }
             }
             else
             {

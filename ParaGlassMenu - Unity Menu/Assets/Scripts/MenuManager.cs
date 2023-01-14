@@ -27,6 +27,7 @@ namespace MenuController {
 		public Text playerSongText;
 		public static string selectedSong;
 		public HelloClient client;
+		public GameObject faceTracker;
 
 	    // Start is called before the first frame update
 	    void Start()
@@ -177,7 +178,8 @@ namespace MenuController {
 			// Switch face tracking debugging mode using Nreal's controller (press App button)
 			if (NRKernal.NRInput.GetButtonDown(NRKernal.ControllerButton.TRIGGER))
 			{
-				FaceTracker.SwitchDebuggingInfoStatus();
+				//FaceTracker.SwitchDebuggingInfoStatus();
+				faceTracker.SetActive(!faceTracker.activeInHierarchy);
 			}
 
 	    }

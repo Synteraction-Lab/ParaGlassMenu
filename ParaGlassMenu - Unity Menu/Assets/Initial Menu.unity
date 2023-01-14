@@ -1466,6 +1466,7 @@ MonoBehaviour:
   KeyCodeText: {fileID: 66610448}
   playerSongText: {fileID: 608722155}
   client: {fileID: 1975337963}
+  faceTracker: {fileID: 518735908}
 --- !u!4 &166620679
 Transform:
   m_ObjectHideFlags: 0
@@ -3972,7 +3973,6 @@ MonoBehaviour:
   menuOffset: {fileID: 778362591}
   FrameCount: {fileID: 1427743747}
   isTesting: 1
-  displayFlag: 0
   debugInfo: {fileID: 622246888}
 --- !u!1 &525247961
 GameObject:
@@ -7630,7 +7630,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OverrideCameraCenter
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1731738422}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad152f08ed7eb6e4abd93376a0203e38, type: 3}
 --- !u!1 &1310820378
@@ -10353,6 +10353,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1723323254}
   m_CullTransparentMesh: 0
+--- !u!4 &1731738422 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4529309942957008, guid: 665d8158924bd2648a94fb3f87691bbb,
+    type: 3}
+  m_PrefabInstance: {fileID: 2073552159}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1738326939
 GameObject:
   m_ObjectHideFlags: 0
