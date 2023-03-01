@@ -1,7 +1,6 @@
 from miio.device import Device
 from miio.integrations.fan.dmaker.fan_miot import FanMiot
 from phue import Bridge
-import time
 from threading import Timer
 from pygame import mixer
 from config import YOUR_FAN_TOKEN, YOUR_PLUG_TOKEN
