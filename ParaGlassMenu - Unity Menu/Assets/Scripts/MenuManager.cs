@@ -6,7 +6,7 @@ using UnityEngine.UI;
 // using NRKernal;
 using Music;
 using FaceTracking;
-
+using Message;
 
 namespace MenuController {
 	public class MenuManager : MonoBehaviour
@@ -20,12 +20,16 @@ namespace MenuController {
 		public GameObject music;
 		public GameObject musicList;
 		public GameObject tea;
+		public GameObject message;
+		public GameObject messageList;
 		public Timer timer;
 		public StateMachine.ProcessState state;
 		private StateMachine.ProcessState last_state;
 		public Text KeyCodeText;
 		public Text playerSongText;
+		public Text messageBubbleText;
 		public static string selectedSong;
+		public static string selectedMessage;
 		public HelloClient client;
 		public GameObject faceTracker;
 
@@ -41,7 +45,9 @@ namespace MenuController {
 	    	fan.SetActive(false);
 	    	music.SetActive(false);
 	    	musicList.SetActive(false);
-	    	tea.SetActive(false);
+			message.SetActive(false);
+			messageList.SetActive(false);
+			tea.SetActive(false);
 	    	// timer.StopTimer();
 	    }
 
@@ -63,7 +69,9 @@ namespace MenuController {
 			    	fan.SetActive(false);
 			    	music.SetActive(false);
 			    	musicList.SetActive(false);
-			    	tea.SetActive(false);
+					message.SetActive(false);
+					messageList.SetActive(false);
+					tea.SetActive(false);
 		    	}
 		    	else if (state == StateMachine.ProcessState.Room) 
 		    	{
@@ -74,7 +82,9 @@ namespace MenuController {
 			    	fan.SetActive(false);
 			    	music.SetActive(false);
 			    	musicList.SetActive(false);
-			    	tea.SetActive(false);
+					message.SetActive(false);
+					messageList.SetActive(false);
+					tea.SetActive(false);
 		    	}
 		    	else if (state == StateMachine.ProcessState.LivingRoom)
 		    	{
@@ -85,7 +95,9 @@ namespace MenuController {
 			    	fan.SetActive(false);
 			    	music.SetActive(false);
 			    	musicList.SetActive(false);
-			    	tea.SetActive(false);
+					message.SetActive(false);
+					messageList.SetActive(false);
+					tea.SetActive(false);
 		    	}
 		    	else if (state == StateMachine.ProcessState.Kitchen)
 		    	{
@@ -96,7 +108,9 @@ namespace MenuController {
 			    	fan.SetActive(false);
 			    	music.SetActive(false);
 			    	musicList.SetActive(false);
-			    	tea.SetActive(false);
+					message.SetActive(false);
+					messageList.SetActive(false);
+					tea.SetActive(false);
 		    	} 
 		    	else if (state == StateMachine.ProcessState.Light)
 		    	{
@@ -107,7 +121,9 @@ namespace MenuController {
 			    	fan.SetActive(false);
 			    	music.SetActive(false);
 			    	musicList.SetActive(false);
-			    	tea.SetActive(false);
+					message.SetActive(false);
+					messageList.SetActive(false);
+					tea.SetActive(false);
 		    	}
 		    	else if (state == StateMachine.ProcessState.Fan)
 		    	{
@@ -118,7 +134,9 @@ namespace MenuController {
 			    	fan.SetActive(true);
 			    	music.SetActive(false);
 			    	musicList.SetActive(false);
-			    	tea.SetActive(false);
+					message.SetActive(false);
+					messageList.SetActive(false);
+					tea.SetActive(false);
 		    	}
 		    	else if (state == StateMachine.ProcessState.Music)
 		    	{
@@ -129,7 +147,9 @@ namespace MenuController {
 			    	fan.SetActive(false);
 			    	music.SetActive(true);
 			    	musicList.SetActive(false);
-			    	tea.SetActive(false);
+					message.SetActive(false);
+					messageList.SetActive(false);
+					tea.SetActive(false);
 			    	if (StateMachine.ParseCommand() == Command.Right){
 			    		selectedSong = MusicController.GetCurrentSelectedSong();
 			    		if (selectedSong != "" && selectedSong != null) 
@@ -151,9 +171,49 @@ namespace MenuController {
 			    	fan.SetActive(false);
 			    	music.SetActive(false);
 			    	musicList.SetActive(true);
-			    	tea.SetActive(false);
+					message.SetActive(false);
+					messageList.SetActive(false);
+					tea.SetActive(false);
 		    	}
-		    	else if (state == StateMachine.ProcessState.Tea)
+
+				else if (state == StateMachine.ProcessState.Message)
+				{
+					room.SetActive(false);
+					livingRoom.SetActive(false);
+					kitchen.SetActive(false);
+					light.SetActive(false);
+					fan.SetActive(false);
+					music.SetActive(false);
+					musicList.SetActive(false);
+					message.SetActive(true);
+					messageList.SetActive(false);
+					tea.SetActive(false);
+					if (StateMachine.ParseCommand() == Command.Right)
+					{
+						selectedMessage = MessageController.GetCurrentSelectedMessage();
+						Debug.Log("current message: " + selectedMessage);
+						if (selectedMessage != "" && selectedMessage != null)
+						{
+							messageBubbleText.text = selectedMessage;
+							client.SendMessage("Message,Send," + selectedMessage);
+							MessageAppController.SendMessage();
+						}
+					}
+				}
+				else if (state == StateMachine.ProcessState.MessageList)
+				{
+					room.SetActive(false);
+					livingRoom.SetActive(false);
+					kitchen.SetActive(false);
+					light.SetActive(false);
+					fan.SetActive(false);
+					music.SetActive(false);
+					musicList.SetActive(false);
+					message.SetActive(false);
+					messageList.SetActive(true);
+					tea.SetActive(false);
+				}
+				else if (state == StateMachine.ProcessState.Tea)
 		    	{
 			    	room.SetActive(false);
 			    	livingRoom.SetActive(false);
@@ -162,7 +222,9 @@ namespace MenuController {
 			    	fan.SetActive(false);
 			    	music.SetActive(false);
 			    	musicList.SetActive(false);
-			    	tea.SetActive(true);
+					message.SetActive(false);
+					messageList.SetActive(false);
+					tea.SetActive(true);
 			    	Command currentCommand = StateMachine.ParseCommand();
 			    	if (last_state == state && currentCommand == Command.Right)
 			    	{
@@ -194,6 +256,17 @@ namespace MenuController {
 	    	return selectedSong;
 
 	    }
+
+		public static string GetSelectedMessage()
+		{
+			if (selectedMessage == "" || selectedMessage == null)
+			{
+				return null;
+
+			}
+			return selectedMessage;
+
+		}
 	}
 
 
@@ -212,6 +285,8 @@ namespace MenuController {
 		{
 		    Init,
 		    Room,
+			Message,
+			MessageList,
 		    LivingRoom,
 		    Kitchen,
 		    Light,
@@ -263,7 +338,12 @@ namespace MenuController {
 		        { new StateTransition(ProcessState.Room, Command.Left), ProcessState.Init},
 		        { new StateTransition(ProcessState.Room, Command.Right), ProcessState.LivingRoom},
 		        { new StateTransition(ProcessState.Room, Command.Down), ProcessState.Kitchen},
-		        { new StateTransition(ProcessState.LivingRoom, Command.Left), ProcessState.Room},
+				{ new StateTransition(ProcessState.Room, Command.Up), ProcessState.Message},
+				{ new StateTransition(ProcessState.Message, Command.Left), ProcessState.Room},
+				{ new StateTransition(ProcessState.Message, Command.Right), ProcessState.MessageList},
+				{ new StateTransition(ProcessState.MessageList, Command.Right), ProcessState.Message},
+				{ new StateTransition(ProcessState.MessageList, Command.Left), ProcessState.Message},
+				{ new StateTransition(ProcessState.LivingRoom, Command.Left), ProcessState.Room},
 		        { new StateTransition(ProcessState.LivingRoom, Command.Right), ProcessState.Fan},
 		        { new StateTransition(ProcessState.LivingRoom, Command.Up), ProcessState.Light},
 		        { new StateTransition(ProcessState.LivingRoom, Command.Down), ProcessState.Music},

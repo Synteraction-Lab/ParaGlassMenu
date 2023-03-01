@@ -13,7 +13,7 @@ class Matter(object):
 
 
 # The states argument defines the name of different menus
-states = ['init', 'rooms', 'door', 'living room', 'kitchen', 'light 1', 'light 2', 'fan', 'music', 'top light',
+states = ['init', 'rooms', 'message', 'message list', 'living room', 'kitchen', 'light 1', 'light 2', 'fan', 'music', 'top light',
           'coffee',
           'tea',
           'dishwasher', 'music list']
@@ -26,8 +26,10 @@ transitions = [
     {'trigger': 'right', 'source': 'init', 'dest': 'rooms'},
     {'trigger': 'down', 'source': 'rooms', 'dest': 'kitchen'},
     {'trigger': 'right', 'source': 'rooms', 'dest': 'living room'},
-    {'trigger': 'up', 'source': 'rooms', 'dest': 'door'},
-    {'trigger': 'left', 'source': 'door', 'dest': 'rooms'},
+    {'trigger': 'up', 'source': 'rooms', 'dest': 'message'},
+    {'trigger': 'left', 'source': 'message', 'dest': 'rooms'},
+    {'trigger': 'right', 'source': 'message', 'dest': 'message list'},
+    {'trigger': 'right', 'source': 'message list', 'dest': 'message'},
     {'trigger': 'left', 'source': 'rooms', 'dest': 'init'},
     {'trigger': 'up', 'source': 'living room', 'dest': 'light 1'},
     {'trigger': 'down', 'source': 'living room', 'dest': 'music'},
