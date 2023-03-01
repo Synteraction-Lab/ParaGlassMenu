@@ -1,19 +1,16 @@
-import os
 from miio.device import Device
 from miio.integrations.fan.dmaker.fan_miot import FanMiot
 from phue import Bridge
 import time
 from threading import Timer
 from pygame import mixer
+from config import YOUR_FAN_TOKEN, YOUR_PLUG_TOKEN
 
 FAN_IP_ADDR = '192.168.31.6'
 PHUE_ADDR = '192.168.31.121'
 PLUG_IP_ADDR = '192.168.31.15'
-# Set the FAN_TOKEN environment variable
-os.environ['FAN_TOKEN'] = os.environ['FAN_REAL_TOKEN']
-
-# Set the PLUG_TOKEN environment variable
-os.environ['PLUG_TOKEN'] = os.environ['PLUG_REAL_TOKEN']
+FAN_TOKEN = YOUR_FAN_TOKEN
+PLUG_TOKEN = YOUR_PLUG_TOKEN
 
 
 class Matter(object):
