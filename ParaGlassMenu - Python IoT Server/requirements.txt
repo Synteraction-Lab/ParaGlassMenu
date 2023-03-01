@@ -1,0 +1,5 @@
+pandas==1.5.1
+phue==1.1
+pygame==2.1.2
+pynput
+python-miio==0.5.12

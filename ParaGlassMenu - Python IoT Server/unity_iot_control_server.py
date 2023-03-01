@@ -1,11 +1,19 @@
+import os
 from miio.device import Device
 from miio.integrations.fan.dmaker.fan_miot import FanMiot
 from phue import Bridge
 import time
 from threading import Timer
-
-from log_utility import log_manipulation_info
 from pygame import mixer
+
+FAN_IP_ADDR = '192.168.31.6'
+PHUE_ADDR = '192.168.31.121'
+PLUG_IP_ADDR = '192.168.31.15'
+# Set the FAN_TOKEN environment variable
+os.environ['FAN_TOKEN'] = os.environ['FAN_REAL_TOKEN']
+
+# Set the PLUG_TOKEN environment variable
+os.environ['PLUG_TOKEN'] = os.environ['PLUG_REAL_TOKEN']
 
 
 class Matter(object):
@@ -99,9 +107,9 @@ class IoTInterface:
         self.start_light()
         self.load_IoT_devices()
         self.init_iot_devices()
-        self.start_linstener()
+        self.start_listener()
 
-    def start_linstener(self):
+    def start_listener(self):
         import time
         import zmq
 
@@ -161,15 +169,15 @@ class IoTInterface:
 
     def load_IoT_devices(self):
         try:
-            self.fan = FanMiot('192.168.31.6', '96efb75b817348d486e8b33ae3b8252d')
+            self.fan = FanMiot(FAN_IP_ADDR, FAN_TOKEN)
         except:
             print("Can't load fan")
         try:
-            self.plug = Device('192.168.31.15', 'e6edc1993dc849482636d4b29bb24e70')
+            self.plug = Device(PLUG_IP_ADDR, PLUG_TOKEN)
         except:
             print("Can't load plug")
         try:
-            self.light_bridge = Bridge('192.168.31.121')
+            self.light_bridge = Bridge(PHUE_ADDR)
             self.start_light()
         except:
             print("Can't load light")
