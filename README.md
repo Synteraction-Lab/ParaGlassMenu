@@ -22,13 +22,15 @@ https://doi.org/10.1145/3544548.3581065
 
 
 ## Requirements
-- For the Python IoT Server, please install `Python 3.9.7`, then run `pip install -r requirement.txt` in the `ParaGlassMenu - Python IoT Server` folder.
-- For the Unity Menu, please install `Unity 2019.4.39f1` first and prepare a Nreal light glasses.
+
+1. For the Python IoT Server, please install `Python 3.9`, and then run `pip install -r requirement.txt` in the `ParaGlassMenu - Python IoT Server` folder.
+2. For the Unity Menu, please install `Unity 2019.4.39f1` first and prepare a Nreal Light glasses.
 
 ## Installation
-- For the Unity project, you can open and build it in Unity. Then please use adb install to install the apk file to the computer unit for Nreal glasses.
-- Please to modify your code based on your real laptop's IP address in the Unity project: `ParaGlassMenu - Unity MenuAssets/NetMQExample/Scripts/HelloRequester.cs` 
-and IoT devices' address and token in the python script: `ParaGlassMenu - Python IoT Server/unity_iot_control_sever.py`.
+
+1. For the Unity project, you can open and build it in Unity. Then, use ADB to install the APK file to the computer unit for Nreal glasses.
+2. Modify your code based on your real computer's IP address (where your run the python sever code) in the Unity project: `ParaGlassMenu - Unity MenuAssets/NetMQExample/Scripts/HelloRequester.cs` and IoT devices' address and token in the Python script: `ParaGlassMenu - Python IoT Server/unity_iot_control_sever.py`.
+3. For the music player, please create a folder `music` under `ParaGlassMenu - Python IoT Server` and put your downloaded music in it.
 
 
 ## References
