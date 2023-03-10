@@ -30,7 +30,9 @@ https://doi.org/10.1145/3544548.3581065
 1. Modify the `address` and `tokens` in the code:
    1. Replace the computer's IP address (where the Python server code runs) in the Unity project: `ParaGlassMenu - Unity MenuAssets/NetMQExample/Scripts/HelloRequester.cs`.
    2. Replace the IoT devices' address and token in the Python script: `ParaGlassMenu - Python IoT Server/unity_iot_control_sever.py`.
-2. Open and build the Unity project in Unity's editor. Then, install the APK file of ParaGlassMemnu to the Computing Unit for Nreal glasses using ADB.
+      1. You can refer to this [link](https://github.com/jghaanstra/com.xiaomi-miio/blob/master/docs/obtain_token.md) to get the token of the Mi Home IoT devices.
+      2. Download Hue on your smartphone to get the Philips Hue's IP address. [Note: The first connect may require you to click the button on the bridge first]
+2. Open and build the Unity project in Unity's editor. Then, install the APK file of ParaGlassMenu to the Computing Unit for Nreal glasses using ADB.
 3. To use the music player, create a folder `music` under `ParaGlassMenu - Python IoT Server` and add downloaded music to it.
 
 
